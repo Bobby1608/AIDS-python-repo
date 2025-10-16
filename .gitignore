@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+.env
+*.log
+
+# IDEs
+.vscode/
+.idea/
+
+# Data and results (keep out of repo unless LFS)
+processed/
+results/
+models/
+dataset/Payload*   # big CSV payloads if any
+*.npy
+*.pkl
+
+# OS
+Thumbs.db
+.DS_Store
+*.tmp
