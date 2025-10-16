@@ -24,3 +24,5 @@ dataset/Payload*   # big CSV payloads if any
 Thumbs.db
 .DS_Store
 *.tmp
+dataset/*.csv
+processed/*.npy
