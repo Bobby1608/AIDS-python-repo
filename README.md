@@ -1,106 +1,98 @@
-# 🛡️ AI-Based Intrusion Detection System (IDS)
+# AI-Based Network Intrusion Detection System
 
-A machine learning-based Intrusion Detection System built on the CICIDS2017 dataset to detect and classify malicious network traffic.
+This project implements a robust Intrusion Detection System (IDS) using a hybrid machine learning approach. It leverages models like Random Forest, XGBoost, and a Multi-Layer Perceptron (MLP) to accurately classify network traffic and identify potential threats. The system is served through a user-friendly web interface built with Flask.
 
----
+## Features
 
-## ✅ Objective
+- **Data Preprocessing:** Efficiently cleans and preprocesses raw network data for feature extraction.
+- **Multiple ML Models:** Implements and evaluates several high-performance classifiers (Random Forest, XGBoost, MLP).
+- **Model Evaluation:** Generates confusion matrices, ROC curves, and classification reports to assess model performance.
+- **Real-time Web Dashboard:** A Flask-based web application for interacting with the trained models and classifying new traffic data.
+- **Large File Handling:** Uses Git LFS to manage large trained model files within the repository.
 
-To detect and classify network intrusions such as DoS, DDoS, brute-force, reconnaissance, and botnet attacks using real-world NetFlow-based data and ML models.
+## Getting Started
 
----
+Follow these instructions to set up and run the project locally.
 
-## 🧠 Technologies Used
+### Prerequisites
 
-- **Language:** Python
-- **Libraries:** Pandas, NumPy, Scikit-learn, XGBoost, MLPClassifier, Matplotlib, Seaborn, imbalanced-learn
-- **Tools:** VS Code, Jupyter, joblib
-- **Dataset:** [CICIDS2017](https://www.unb.ca/cic/datasets/ids-2017.html)
+Before you begin, ensure you have the following installed on your system:
 
----
+- [Python 3.8+](https://www.python.org/downloads/)
+- [Git](https://git-scm.com/)
+- **Git LFS (Large File Storage)** - This is crucial for downloading the trained models.
+  - Install it from [here](https://git-lfs.github.com/).
+  - After installing, run `git lfs install` once in your terminal to initialize it.
 
-## 📁 Folder Structure
+### Installation & Setup
 
-MyNetworkIDSProject/
-├── dataset/ # Raw CSV data from CICIDS2017
-├── processed/ # Preprocessed .npy arrays for model training
-├── models/ # Saved trained models (pkl files)
-├── src/ # Source scripts
-│ ├── load_data.py
-│ ├── preprocess.py
-│ ├── train_model.py
-│ ├── evaluate.py
-│ └── visualize.py
-├── README.md # Project documentation
+1.  **Clone the Repository**
 
----
+    ```bash
+    git clone [https://github.com/Bobby1608/AIDS-python-repo.git](https://github.com/Bobby1608/AIDS-python-repo.git)
+    cd AIDS-python-repo
+    ```
 
-## 🧪 Phase 1: Data Preparation
+2.  **Download Model Files**
+    The trained models are stored using Git LFS. Run the following command to download them.
 
-- ✅ Loaded CICIDS2017 CSVs (NetFlow + Payload)
-- ✅ Cleaned missing values, dropped duplicates
-- ✅ Extracted relevant flow-based features
-- ✅ Encoded multiclass labels (e.g., DoS, DDoS, Web, BruteForce, etc.)
-- ✅ Normalized features with RobustScaler
-- ✅ Saved final arrays as `X_train.npy`, `y_train.npy`, `X_test.npy`, `y_test.npy`
+    ```bash
+    git lfs pull
+    ```
 
----
+    You should see the `.pkl` files in the `models/` directory change from being a few bytes to their full size (e.g., 405 MB).
 
-## 🤖 Phase 2: Model Training & Evaluation
+3.  **Download the Datasets**
+    Due to their large size, the raw datasets (`.csv`) and processed NumPy arrays (`.npy`) are not stored in this Git repository. Please download them from the link(s) below and place them in the correct folders.
 
-### ✅ Models Trained
+    - **Required Datasets:**
+      - Download the dataset files here: `[LINK_TO_YOUR_DATA_ON_GOOGLE_DRIVE_OR_RELEASE]` - **Placement:**
+      - Place all `.csv` files inside the `dataset/` folder.
+      - Place all `.npy` files inside the `processed/` folder.
 
-| Model             | Accuracy   | Notes                                              |
-| ----------------- | ---------- | -------------------------------------------------- |
-| **Random Forest** | **99.68%** | Best overall, high precision/recall                |
-| XGBoost           | 99.68%     | Great with small class handling (after resampling) |
-| MLP Classifier    | 99.58%     | Deep neural net, slightly slower training          |
+4.  **Create a Virtual Environment**
+    It is highly recommended to use a virtual environment to manage project dependencies.
 
-- Trained on 2M+ samples from CICIDS2017.
-- Saved as `rf_model.pkl`, `xgb_model.pkl`, and `mlp_model.pkl`.
+    ```bash
+    # Create the virtual environment
+    python -m venv .venv
 
-### 🧪 Evaluation Metrics
+    # Activate it (on Windows)
+    .venv\Scripts\activate
 
-- High precision/recall on common attacks (Normal, DoS, DDoS)
-- Lower performance on rare attacks (Botnet, XSS, SQL Injection) — to be improved with SMOTE/class weighting
+    # On macOS/Linux, you would use:
+    # source .venv/bin/activate
+    ```
 
-### 📊 Visualizations
+5.  **Install Dependencies**
+    Install all required Python packages from the `requirements.txt` file.
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-Confusion matrices and ROC curves for all models are saved as:
+## How to Run
 
-random_forest_confusion_matrix.png
-xgboost_confusion_matrix.png
-mlp_classifier_confusion_matrix.png
-roc_curve_comparison.png
+After completing the setup, you can run the main web application.
 
----
+1.  **Start the Flask Server**
+    Navigate to the project's root directory and run the main application script:
 
-## 🔍 Current Best Model
+    ```bash
+    python src/webapp/app_combined2.py
+    ```
 
-**✅ Random Forest** is currently chosen as the primary classifier due to its:
+    _(Note: If your main Flask app file has a different name, please update the command accordingly.)_
 
-- Excellent accuracy
-- Fast inference speed
-- Robustness across classes
+2.  **Access the Web Interface**
+    Open your web browser and navigate to the following address:
+    [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
----
+## Project Team
 
-## 🚧 To Do (Future Work / Phase 3+)
+This section can be filled out by the project contributors.
 
-- ✅ Add SMOTE resampling to improve rare-class detection
-- ⏳ Implement live inference module (`predict.py`)
-- ⏳ Add CLI or GUI for user interaction
-- ⏳ Convert model to ONNX or serve via REST API
-- ⏳ Deploy to cloud or edge device
+-Bhuban Wakode
 
----
+## License
 
-## 📌 Credits
-
-- Dataset: [CICIDS 2017 by Canadian Institute for Cybersecurity](https://www.unb.ca/cic/datasets/ids-2017.html)
-- Model structure & pipeline: Self-built from scratch using Scikit-learn + XGBoost
-
----
-
-> 💡 Project Status: ✅ Phase 1 + 2 Completed  
-> Waiting for real-time prediction & advanced improvements.
+This project is licensed under the MIT License. See the `LICENSE` file for more details.
