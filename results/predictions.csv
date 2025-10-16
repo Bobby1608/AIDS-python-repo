@@ -1,16 +1,3 @@
-Model,Sample,Predicted,Confidence
-RandomForest,1,Generic,1.0
-RandomForest,2,Generic,1.0
-RandomForest,3,Generic,1.0
-RandomForest,4,Generic,1.0
-RandomForest,5,Generic,1.0
-XGBoost,1,Generic,0.9999940395355225
-XGBoost,2,Generic,0.9999892711639404
-XGBoost,3,Generic,0.9999940395355225
-XGBoost,4,Generic,0.9999940395355225
-XGBoost,5,Generic,0.9999938011169434
-MLP,1,Generic,0.999999743137669
-MLP,2,Generic,0.99999588834983
-MLP,3,Generic,0.9999998620692369
-MLP,4,Generic,0.9999999416623692
-MLP,5,Generic,0.9999997092917324
+version https://git-lfs.github.com/spec/v1
+oid sha256:575655786672fb8e5b3a42887d2980a6fd200ff4db99924326daa3586bbc0ec0
+size 532
