@@ -1,0 +1,306 @@
+INDEX_HTML = """
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Powered Intrusion Detection System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-dark: #1a1a2e;
+      --bg-light: #2a2a4a;
+      --primary: #00a8ff;
+      --text-light: #f0f0f0;
+      --text-dark: #a0a0c0;
+      --border-color: #3a3a5a;
+      --green: #2ecc71;
+      --red: #e74c3c;
+      --orange: #f39c12;
+      --white: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      display: flex;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .sidebar {
+      width: 280px;
+      background-color: var(--bg-light);
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 2rem 1.5rem;
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar h1 {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+    }
+    .sidebar h1 i { margin-right: 10px; }
+    .sidebar nav ul { list-style: none; }
+    .sidebar nav ul li a {
+      color: var(--text-dark);
+      text-decoration: none;
+      display: block;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .sidebar nav ul li a i {
+        margin-right: 12px;
+        width: 20px;
+        text-align: center;
+    }
+    .sidebar nav ul li a:hover, .sidebar nav ul li a.active {
+      background-color: var(--primary);
+      color: var(--white);
+    }
+    .team-info {
+        margin-top: auto;
+        font-size: 0.8rem;
+    }
+    .team-info h3 {
+        color: var(--text-light);
+        margin-bottom: 0.5rem;
+    }
+    .team-info p { color: var(--text-dark); line-height: 1.4; }
+
+    .main-content {
+      margin-left: 280px;
+      padding: 2rem 3rem;
+      width: calc(100% - 280px);
+    }
+    section {
+      background-color: var(--bg-light);
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border-color);
+    }
+    h2 {
+      font-size: 2rem;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+    }
+    h2 i { margin-right: 15px; color: var(--primary); }
+    p { line-height: 1.7; color: var(--text-dark); margin-bottom: 1rem; }
+    ul { list-style-position: inside; padding-left: 1rem; }
+    li { margin-bottom: 0.5rem; color: var(--text-dark); }
+    
+    #dashboard-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+    #eval {
+      background-color: var(--primary);
+      color: var(--white);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+    #eval:hover { background-color: #008fdb; transform: translateY(-2px); }
+    #eval_result { margin-top: 1rem; font-weight: 600; }
+    .models-loaded { color: var(--text-dark); }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 1rem;
+    }
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+    thead {
+      background-color: #3a3a5a;
+      color: var(--text-light);
+      font-weight: 600;
+    }
+    tbody tr {
+        transition: background-color 0.3s;
+    }
+    tbody tr:hover { background-color: #2f2f4f; }
+    .conf { font-size: 0.85em; color: var(--text-dark); }
+    
+    /* Prediction-specific colors */
+    .pred-cell { font-weight: 600; }
+    .pred-cell.normal { color: var(--green); }
+    .pred-cell.attack { color: var(--red); }
+    .pred-cell.other { color: var(--orange); }
+
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h1><i class="fas fa-shield-alt"></i>IDS Dashboard</h1>
+    <nav>
+      <ul>
+        <li><a href="#dashboard"><i class="fas fa-chart-line"></i>Live Dashboard</a></li>
+        <li><a href="#intro"><i class="fas fa-info-circle"></i>Introduction</a></li>
+        <li><a href="#objective"><i class="fas fa-bullseye"></i>Objective</a></li>
+        <li><a href="#methodology"><i class="fas fa-cogs"></i>Methodology</a></li>
+        <li><a href="#tech"><i class="fas fa-microchip"></i>Technology Used</a></li>
+      </ul>
+    </nav>
+    <div class="team-info">
+        <h3><i class="fas fa-users"></i>Team Members</h3>
+        <p>Yash C, Bhuban W, Mayur N, Parth K, Aryan K, Aditya P, Malhar K</p>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <section id="dashboard">
+      <h2><i class="fas fa-wave-square"></i>Live Network Traffic Analysis</h2>
+      <div id="dashboard-controls">
+          <p class="models-loaded"><b>Loaded Models:</b> {{ models or "Simulation Mode" }}</p>
+          <button id="eval"><i class="fas fa-play-circle"></i> Run Full Evaluation</button>
+      </div>
+      <div id="eval_result"></div>
+      <table id="pred_table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>True Label</th>
+            <th>RandomForest</th>
+            <th>XGBoost</th>
+            <th>MLP</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section id="intro">
+        <h2><i class="fas fa-book-open"></i>Introduction</h2>
+        <p>With the rise of cyber threats, traditional security systems are no longer sufficient. This project presents an Intrusion Detection System (IDS) powered by AI and Machine Learning. It integrates multiple models (Random Forest, XGBoost, MLP) to classify network traffic and detect cyberattacks in real time.</p>
+    </section>
+
+    <section id="objective">
+        <h2><i class="fas fa-bullseye"></i>Project Objective</h2>
+        <ul>
+            <li>Design and implement a hybrid AI-based IDS for high-accuracy attack detection.</li>
+            <li>Preprocess and train on benchmark datasets like UNSW-NB15 & CICIDS.</li>
+            <li>Evaluate models with research-grade metrics.</li>
+            <li>Deploy results via a real-time interactive web dashboard.</li>
+        </ul>
+    </section>
+
+    <section id="methodology">
+        <h2><i class="fas fa-cogs"></i>Methodology</h2>
+        <ol>
+            <li><b>Dataset Selection:</b> Using UNSW-NB15, a benchmark for multi-class attack categories.</li>
+            <li><b>Data Preprocessing:</b> Cleaning, encoding categorical features, and normalization.</li>
+            <li><b>Model Training:</b> Training Random Forest, XGBoost, and MLP with cross-validation.</li>
+            <li><b>Evaluation:</b> Using Accuracy, Precision, Recall, F1-Score, and Confusion Matrix.</li>
+            <li><b>Deployment:</b> A Flask web app with live streaming predictions.</li>
+        </ol>
+    </section>
+
+    <section id="tech">
+        <h2><i class="fas fa-microchip"></i>Tools and Technology</h2>
+        <p><b>Languages:</b> Python (ML, backend), HTML/CSS/JS (frontend).</p>
+        <p><b>Libraries:</b> Scikit-learn, XGBoost, Pandas, NumPy, Matplotlib, Flask.</p>
+        <p><b>Frameworks:</b> Flask (web), Joblib (model persistence).</p>
+    </section>
+  </div>
+
+<script>
+  const evtSource = new EventSource("/stream");
+  const tbody = document.querySelector("#pred_table tbody");
+
+  function getPredictionClass(pred) {
+      if (!pred) return '';
+      const lowerPred = pred.toLowerCase();
+      if (lowerPred.includes('normal')) return 'normal';
+      if (lowerPred.includes('dos') || lowerPred.includes('attack')) return 'attack';
+      return 'other';
+  }
+
+  evtSource.onmessage = function(e) {
+    try {
+      const batch = JSON.parse(e.data);
+      tbody.innerHTML = ""; // Clear and fill fresh each batch
+      batch.samples.forEach((s) => {
+        const tr = document.createElement("tr");
+
+        const rfPred = s.predictions.RandomForest;
+        const xgbPred = s.predictions.XGBoost;
+        const mlpPred = s.predictions.MLP;
+
+        tr.innerHTML = `
+          <td>${s.sample_index}</td>
+          <td>${s.true || "-"}</td>
+          <td class="pred-cell ${getPredictionClass(rfPred.pred)}">
+              ${rfPred.pred} <span class="conf">(${rfPred.conf})</span>
+          </td>
+          <td class="pred-cell ${getPredictionClass(xgbPred.pred)}">
+              ${xgbPred.pred} <span class="conf">(${xgbPred.conf})</span>
+          </td>
+          <td class="pred-cell ${getPredictionClass(mlpPred.pred)}">
+              ${mlpPred.pred} <span class="conf">(${mlpPred.conf})</span>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    } catch(err) {
+      console.error("Failed to parse stream", err);
+    }
+  };
+
+  evtSource.onerror = function(e) {
+    console.error("EventSource failed.", e);
+  };
+
+  document.getElementById("eval").addEventListener("click", async () => {
+    const resultDiv = document.getElementById("eval_result");
+    resultDiv.style.color = 'var(--primary)';
+    resultDiv.textContent = "Running full evaluation... this may take a moment.";
+    try {
+      const res = await fetch("/evaluate");
+      const data = await res.json();
+      if (data.error) {
+        resultDiv.style.color = 'var(--red)';
+        resultDiv.textContent = "Error: " + data.error;
+      } else {
+        resultDiv.style.color = 'var(--green)';
+        resultDiv.textContent = "Success! Evaluation report saved to: " + data.saved_to;
+      }
+    } catch (err) {
+      resultDiv.style.color = 'var(--red)';
+      resultDiv.textContent = "Request Failed: " + err;
+    }
+  });
+</script>
+</body>
+</html>
+"""

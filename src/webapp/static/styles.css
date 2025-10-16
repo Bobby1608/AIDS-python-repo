@@ -1,0 +1,97 @@
+/* General Layout */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0a0f1f;
+  color: #e4e4e4;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/* Header */
+header {
+  background: linear-gradient(90deg, #111a2f, #0c2b46);
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 255, 170, 0.2);
+}
+header h1 {
+  color: #00ffaa;
+  text-shadow: 0 0 10px #00ffaa;
+}
+header .subtitle {
+  color: #9fdaf5;
+  font-size: 1.1em;
+}
+
+/* Status Banner */
+.status-banner {
+  margin: 20px auto;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 1.2em;
+  width: 70%;
+  background: #1f2d4d;
+  color: #ccc;
+  transition: all 0.3s ease-in-out;
+}
+.status-banner.alert {
+  background: #ff003c;
+  color: #fff;
+  box-shadow: 0 0 15px #ff003c;
+}
+
+/* Main Sections */
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  padding: 30px;
+}
+
+/* Chart Container */
+.chart-container, .table-container {
+  background: #141a2f;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 150, 255, 0.2);
+}
+h2 {
+  color: #00ffaa;
+  margin-bottom: 15px;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #eee;
+}
+thead {
+  background: #1f2d4d;
+}
+th, td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #2d3a5c;
+}
+tbody tr:hover {
+  background: rgba(0, 255, 170, 0.05);
+}
+.attack {
+  color: #ff4d6d;
+  font-weight: bold;
+  text-shadow: 0 0 5px #ff003c;
+}
+.normal {
+  color: #00ffaa;
+  font-weight: bold;
+  text-shadow: 0 0 5px #00ffaa;
+}
+
+/* Footer */
+footer {
+  margin-top: 20px;
+  padding: 15px;
+  background: #0c1224;
+  font-size: 0.9em;
+  color: #9fdaf5;
+}
