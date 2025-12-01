@@ -49,13 +49,12 @@ Ensure the following tools are installed on your system:
 
 3.  **Acquire Dataset Files**
 
-    The large raw and processed datasets are hosted externally. The project uses the well-known **NSL-KDD Dataset** (KDDTrain+ and KDDTest+ files). Please search for and download these files, and place them in the correct directory structure:
+    The large raw and processed datasets are hosted externally. The project uses the well-known **UNSW-NB15 Dataset** (specifically the `UNSW_NB15_training-set.csv` and `UNSW_NB15_testing-set.csv` files, as loaded by `src/load_data.py`). Please search for and download these files, and place them in the correct directory structure:
 
-    * **Required Datasets:** **UNSW-NB15 Dataset** (The canonical dataset for this type of IDS)
+    * **Required Datasets:** **UNSW-NB15 Dataset**
     * **Placement:**
         * Place all **raw CSV files** (`.csv`) inside the `./dataset/` folder.
         * Place all **processed NumPy arrays** (`.npy`) inside the `./processed/` folder.
-
 4.  **Create & Activate Virtual Environment**
 
     It is mandatory to use a virtual environment to isolate project dependencies.
@@ -110,4 +109,5 @@ Ensure the following tools are installed on your system:
 ## 📄 License
 
 This project is licensed under the **MIT License**. See the `LICENSE` file in the repository root for full details.
+
 
