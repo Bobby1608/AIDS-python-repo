@@ -1,4 +1,4 @@
-# 🛡️ AI-Based Network Intrusion Detection System (NIDS)
+# 🛡️ AI-Based Network Intrusion Detection System (AIDS)
 
 This project implements a robust, real-time Intrusion Detection System (IDS) utilizing a **hybrid machine learning approach**. It accurately classifies network traffic into benign or malicious categories by leveraging high-performance ensemble models and neural networks.
 
@@ -109,5 +109,6 @@ Ensure the following tools are installed on your system:
 ## 📄 License
 
 This project is licensed under the **MIT License**. See the `LICENSE` file in the repository root for full details.
+
 
 
