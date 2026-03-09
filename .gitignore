@@ -12,17 +12,15 @@ venv/
 .vscode/
 .idea/
 
-# Data and results (keep out of repo unless LFS)
+# Data and results (Users should generate these or download manually)
 processed/
 results/
-models/
-dataset/Payload*   # big CSV payloads if any
+dataset/
 *.npy
-*.pkl
 
 # OS
 Thumbs.db
 .DS_Store
 *.tmp
-dataset/*.csv
-processed/*.npy
+
+# Notice: We removed models/ and *.pkl from here so Git LFS can track them!
